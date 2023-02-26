@@ -14,9 +14,25 @@ class WallService {
         var result: Boolean
         if (updatePost != null) {
             val index = Wall.indexOf(updatePost)
-            Wall.set(index,post)
+            Wall.set(index, post)
             result = true
         } else result = false
         return result
     }
-}
+
+    private var posts = emptyArray<Post>()
+    private var comments = emptyArray<Comments>()
+
+    fun createComment(postId: Int, comments: Comments): Comments {
+        var a = 0
+        while (a < posts.size) {
+            if (posts[a].id == postId) {
+                posts[a].comments = comments
+                return comments
+            } else {
+                a++
+            }
+        }
+        throw PostNotFoundException("Не найден пост с таким id")
+    }}
+
